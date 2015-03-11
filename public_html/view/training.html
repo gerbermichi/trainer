@@ -1,0 +1,42 @@
+<form name="projectForm">
+    <md-input-container>
+        <label>Name</label>
+        <input required name="name" ng-model="training.name" />
+        <div ng-messages="projectForm.name.$error">
+            <div ng-message="required">This is required.</div>
+        </div>
+    </md-input-container>
+    
+     <md-input-container>
+        <label>Thema/Ziel der Übung</label>
+        <textarea required name="goal" ng-model="training.goal"></textarea>
+        <div ng-messages="projectForm.goal.$error">
+            <div ng-message="required">This is required.</div>
+        </div>
+    </md-input-container>
+    
+     <md-input-container>
+        <label>Ablauf</label>
+        <textarea required name="flow" ng-model="training.flow"></textarea>
+        <div ng-messages="projectForm.flow.$error">
+            <div ng-message="required">This is required.</div>
+        </div>
+    </md-input-container>
+    
+     <md-input-container>
+        <label>Variation</label>
+        <textarea name="variation" ng-model="training.variation"></textarea>
+    </md-input-container>
+    
+     <md-input-container>
+        <label>Tipps und Korrekturen</label>
+        <textarea name="tipps" ng-model="training.tipps"></textarea>
+    </md-input-container>
+    
+    <md-input-container>
+        <label class="md-no-float">Tipps und Korrekturen</label>
+        <input type="file" onchange="angular.element(this).scope().setFiles(this)">
+    </md-input-container>
+   
+    <md-button class="md-raised md-primary" ng-click="save()" ng-disabled="projectForm.$invalid">Save</md-button>
+</form>

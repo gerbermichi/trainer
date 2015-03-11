@@ -1,0 +1,11 @@
+{
+    "attributes": {},
+    "elements": {
+        "md-button": {
+            "attributes": {
+                "class": {}
+            }
+        },
+        "md-input-container": {}
+    }
+}
