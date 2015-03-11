@@ -24,6 +24,10 @@
                     .when('/training', {
                         templateUrl: 'view/training.html',
                         controller: 'trainingCtrl'
+                    })
+                    .when('/trainings', {
+                        templateUrl: 'view/trainings.html',
+                        controller: 'trainingsCtrl'
                     }).otherwise({redirectTo: '/training'});
 
 

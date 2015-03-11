@@ -9,7 +9,7 @@
     
      <md-input-container>
         <label>Thema/Ziel der Übung</label>
-        <textarea required name="goal" ng-model="training.goal"></textarea>
+        <textarea required name="goal" ng-model="training.goal" class="md-input "></textarea>
         <div ng-messages="projectForm.goal.$error">
             <div ng-message="required">This is required.</div>
         </div>
@@ -35,8 +35,12 @@
     
     <md-input-container>
         <label class="md-no-float">Tipps und Korrekturen</label>
-        <input type="file" onchange="angular.element(this).scope().setFiles(this)">
+        <div>
+            <img src="{{training.file}}"  />
+            <input type="file" onchange="angular.element(this).scope().setFiles(this)">
+        </div>
     </md-input-container>
+    
    
     <md-button class="md-raised md-primary" ng-click="save()" ng-disabled="projectForm.$invalid">Save</md-button>
 </form>
