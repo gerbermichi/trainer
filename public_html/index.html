@@ -18,7 +18,7 @@ and open the template in the editor.
 
     <md-toolbar layout="row">
         <md-button class="menu" hide-gt-sm ng-click="toggleList()" aria-label="Show User List">
-            <md-icon md-svg-icon="menu" ></md-icon>
+            <md-icon md-svg-src="img/menu.svg"></md-icon>
         </md-button>
         <h1>Trainer</h1>
     </md-toolbar>
@@ -30,7 +30,7 @@ and open the template in the editor.
                 <md-item>
                     <md-item-content>
                         <md-button ng-click="setMenu('home')" ng-class="{'md-primary':menu === 'home'}">
-                            <md-icon md-svg-icon="hangouts"></md-icon>
+                            <md-icon md-svg-src="img/home.svg"></md-icon>
                             <span>Home</span>
                         </md-button>
                     </md-item-content>
@@ -38,8 +38,8 @@ and open the template in the editor.
                 <md-item >
                     <md-item-content>
                         <md-button ng-click="setMenu('trainings')" ng-class="{'md-primary':menu === 'trainings'}">
-                            <md-icon md-svg-icon="google_plus" ></md-icon>
-                            Training
+                            <md-icon md-svg-src="img/accessibility.svg"></md-icon>
+                            Trainings Einheiten
                         </md-button>
                     </md-item-content>
                 </md-item>

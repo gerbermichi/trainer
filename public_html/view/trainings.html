@@ -1,12 +1,27 @@
+<md-button class="md-fab md-primary" aria-label="Add" ng-click="add()">
+    <md-icon md-svg-src="img/plus.svg"></md-icon>
+</md-button>
 <md-list>
     <md-item ng-repeat="training in trainings">
-        <md-item-content>
+        <md-item-content class="md-whiteframe-z1">
             <div class="md-tile-left">
-                a
+                 <md-icon md-svg-src="img/{{training.phase}}.svg"></md-icon>
             </div>
-            <div class="md-tile-content">
-                <h3>{{training.name}}</h3>
-                <img src="{{training.file}}">
+            <div class="md-tile-content" layout="row">
+                <div flex="66">
+                    <h3>{{training.name}}</h3>
+                    <p>
+                        {{training.flow}}
+                    </p>
+                </div>
+                <div flex="33" style="text-align: right">
+                    <md-button class="md-fab md-primary" aria-label="Edit" ng-click="edit(training)">
+                        <md-icon md-svg-src="img/pencil2.svg"></md-icon>
+                    </md-button>
+                    <md-button class="md-fab md-warn" aria-label="Delete" ng-click="delete(training)">
+                        <md-icon md-svg-src="img/minus.svg"></md-icon>
+                    </md-button>
+                </div>              
             </div>
         </md-item-content>
     </md-item>

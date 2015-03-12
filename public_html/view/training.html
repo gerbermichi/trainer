@@ -1,4 +1,4 @@
-<form name="projectForm">
+<form name="projectForm" ng-if="loaded">
     <md-input-container>
         <label>Name</label>
         <input required name="name" ng-model="training.name" />
@@ -6,6 +6,15 @@
             <div ng-message="required">This is required.</div>
         </div>
     </md-input-container>
+   
+     <md-input-container>
+        <label class="md-no-float">Phase</label>
+        <md-radio-group ng-model="training.phase">
+            <md-radio-button value="warmup">Aufwärmen</md-radio-button>
+            <md-radio-button value="main"> Haupttail </md-radio-button>
+            <md-radio-button value="game">Spielteil</md-radio-button>
+        </md-radio-group>
+    </md-input-container>    
     
      <md-input-container>
         <label>Thema/Ziel der Übung</label>
@@ -34,9 +43,9 @@
     </md-input-container>
     
     <md-input-container>
-        <label class="md-no-float">Tipps und Korrekturen</label>
+        <label class="md-no-float">Plan</label>
         <div>
-            <img src="{{training.file}}"  />
+            <img src="{{file.data}}"  />
             <input type="file" onchange="angular.element(this).scope().setFiles(this)">
         </div>
     </md-input-container>
@@ -44,3 +53,4 @@
    
     <md-button class="md-raised md-primary" ng-click="save()" ng-disabled="projectForm.$invalid">Save</md-button>
 </form>
+<md-progress-linear md-mode="indeterminate" ng-if="!loaded"></md-progress-linear>
