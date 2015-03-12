@@ -1,0 +1,67 @@
+<md-toolbar md-scroll-shrink>
+    <div class="md-toolbar-tools">
+        <h3>
+            <span>Trainings Einheiten Bearbeiten</span>
+        </h3>
+        <div flex></div>
+        <md-button class="md-fab" aria-label="Back" ng-click="back()">
+            <md-icon md-svg-src="img/accessibility.svg"></md-icon>
+        </md-button>
+    </div>
+</md-toolbar>
+<form name="projectForm" ng-if="loaded">
+    <md-input-container>
+        <label>Name</label>
+        <input required name="name" ng-model="unit.name" />
+        <div ng-messages="projectForm.name.$error">
+            <div ng-message="required">This is required.</div>
+        </div>
+    </md-input-container>
+   
+     <md-input-container>
+        <label class="md-no-float">Phase</label>
+        <md-radio-group ng-model="unit.phase">
+            <md-radio-button value="warmup">Aufwärmen</md-radio-button>
+            <md-radio-button value="main"> Haupttail </md-radio-button>
+            <md-radio-button value="game">Spielteil</md-radio-button>
+        </md-radio-group>
+    </md-input-container>    
+    
+     <md-input-container>
+        <label>Thema/Ziel der Übung</label>
+        <textarea required name="goal" ng-model="unit.goal"></textarea>
+        <div ng-messages="projectForm.goal.$error">
+            <div ng-message="required">This is required.</div>
+        </div>
+    </md-input-container>
+    
+     <md-input-container>
+        <label>Ablauf</label>
+        <textarea required name="flow" ng-model="unit.flow"></textarea>
+        <div ng-messages="projectForm.flow.$error">
+            <div ng-message="required">This is required.</div>
+        </div>
+    </md-input-container>
+    
+     <md-input-container>
+        <label>Variation</label>
+        <textarea name="variation" ng-model="unit.variation"></textarea>
+    </md-input-container>
+    
+     <md-input-container>
+        <label>Tipps und Korrekturen</label>
+        <textarea name="tipps" ng-model="unit.tipps"></textarea>
+    </md-input-container>
+    
+    <md-input-container>
+        <label class="md-no-float">Plan</label>
+        <div>
+            <img src="{{file.data}}"  />
+            <input type="file" onchange="angular.element(this).scope().setFiles(this)">
+        </div>
+    </md-input-container>
+    
+   
+    <md-button class="md-raised md-primary" ng-click="save()" ng-disabled="projectForm.$invalid">Save</md-button>
+</form>
+<md-progress-linear md-mode="indeterminate" ng-if="!loaded"></md-progress-linear>

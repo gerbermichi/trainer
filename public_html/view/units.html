@@ -1,36 +1,32 @@
 <md-toolbar md-scroll-shrink>
     <div class="md-toolbar-tools">
         <h3>
-            <span>Trainings</span>
+            <span>Trainings Einheiten</span>
         </h3>
         <div flex></div>
-
         <md-button class="md-fab" aria-label="Add" ng-click="add()">
             <md-icon md-svg-src="img/plus.svg"></md-icon>
         </md-button>
     </div>
 </md-toolbar>
-<md-list ng-if='loaded'>
-    <md-item ng-repeat="training in trainings">
+<md-list ng-if="loaded">
+    <md-item ng-repeat="unit in units">
         <md-item-content class="md-whiteframe-z1">
             <div class="md-tile-left">
-                <md-icon md-svg-src="img/accessibility.svg"></md-icon>
+                <md-icon md-svg-src="img/{{unit.phase}}.svg"></md-icon>
             </div>
             <div class="md-tile-content" layout="row">
                 <div flex="66">
-                    <h3>{{training.name}}</h3>
+                    <h3>{{unit.name}}</h3>
                     <p>
-                        {{training.flow}}
+                        {{unit.flow}}
                     </p>
                 </div>
                 <div flex="33" style="text-align: right">
-                    <md-button class="md-fab" aria-label="Store" ng-click="store(training)">
-                        <md-icon md-svg-src="img/download.svg"></md-icon>
-                    </md-button>
-                    <md-button class="md-fab md-primary" aria-label="Edit" ng-click="edit(training)">
+                    <md-button class="md-fab md-primary" aria-label="Edit" ng-click="edit(unit)">
                         <md-icon md-svg-src="img/pencil2.svg"></md-icon>
                     </md-button>
-                    <md-button class="md-fab md-warn" aria-label="Delete" ng-click="delete(training)">
+                    <md-button class="md-fab md-warn" aria-label="Delete" ng-click="delete(unit)">
                         <md-icon md-svg-src="img/minus.svg"></md-icon>
                     </md-button>
                 </div>              
