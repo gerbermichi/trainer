@@ -1,20 +1,8 @@
 (function () {
     'use strict';
 
-    var app = angular.module('trainer', ['ngMaterial', 'ngRoute', 'ngMessages', 'ngResource']);
+    var app = angular.module('trainer', ['ngMaterial', 'ngRoute', 'ngMessages', 'ngResource','ngSanitize']);
     app.config(['$mdThemingProvider', '$mdIconProvider', '$routeProvider', '$locationProvider', '$httpProvider', function ($mdThemingProvider, $mdIconProvider, $routeProvider, $locationProvider, $httpProvider) {
-
-            /*
-             $mdIconProvider
-             .defaultIconSet("./img/avatars.svg", 128)
-             .icon("menu", "./img/menu.svg", 24)
-             .icon("share", "./img/share.svg", 24)
-             .icon("google_plus", "./img/google_plus.svg", 512)
-             .icon("hangouts", "./img/hangouts.svg", 512)
-             .icon("twitter", "./img/twitter.svg", 512)
-             .icon("phone", "./img/phone.svg", 512);
-             */
-
             $mdThemingProvider.theme('default')
                     .primaryPalette('blue');
 
@@ -42,8 +30,17 @@
                     .when('/trainings', {
                         templateUrl: 'view/trainings.html',
                         controller: 'trainingsCtrl'
+                    })
+                    .when('/mytrainings', {
+                        templateUrl: 'view/mytrainings.html',
+                        controller: 'myTrainingsCtrl'
                     }).otherwise({redirectTo: '/units'});
         }]);
 
+    app.filter('replaceNewLine', function () {
+        return function (input) {
+            return input.replace("\n","<br />")
+        };
+    });
 
 })();

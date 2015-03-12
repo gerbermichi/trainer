@@ -22,7 +22,7 @@
                 Unit.get({id: $routeParams.id}, function (unit) {
                     $scope.unit = unit;
                     if (angular.isDefined($scope.unit.fileId)) {
-                        File.get({id: $scope.unit.fileId}, function (file) {
+                        File.get({id: $scope.unit.fileId.$oid}, function (file) {
                             $scope.file = file;
                             $scope.loaded = true;
                         });
@@ -39,7 +39,7 @@
 
             $scope.save = function () {
                 $scope.file.$save(function (f) {
-                    $scope.unit.fileId = f._id.$oid;
+                    $scope.unit.fileId = f._id;
                     $scope.unit.$save();
                     $location.path('/units');
                 });
@@ -112,11 +112,26 @@
                 for (var i = trainings.length - 1; i >= 0; i--) {
                     if (trainings[i]._id.$oid === training._id.$oid) {
                         trainings.splice(i, 1);
-                        console.log(i);
                     }
-                } 
-                Unit.query({q:{_id:{$oid:{$in:training.unitIds}}}},function(units){
-                    console.log(units)
+                }
+                Unit.query({q: {_id: {$in: training.unitIds}}}, function (units) {
+                    var fileIds = [];
+                    angular.forEach(units, function (value) {
+                        fileIds.push(value.fileId);
+                    });
+                    File.query({q: {_id: {$in: fileIds}}}, function (files) {
+                        angular.forEach(units, function (unit) {
+                            for(var i = 0; i < files.length; i++){
+                                if(unit.fileId.$oid == files[i]._id.$oid){
+                                    unit.file = files[i];
+                                    break;
+                                }
+                            }
+                        });
+                        training.units = units;
+                        trainings.push(training);
+                        localStorage.trainings = angular.toJson(trainings);
+                    });
                 });
             };
             $scope.add = function () {
@@ -149,8 +164,6 @@
                 }
             });
 
-
-
             $scope.back = function () {
                 $location.path("trainings");
             };
@@ -171,10 +184,20 @@
             $scope.save = function () {
                 $scope.training.unitIds = [];
                 angular.forEach($scope.units, function (value, key) {
-                    $scope.training.unitIds.push(value._id.$oid);
+                    $scope.training.unitIds.push(value._id);
                 });
                 $scope.training.$save();
                 $location.path('/trainings');
             };
+        }]);
+     angular.module('trainer').controller("myTrainingsCtrl", ['$scope', '$resource', '$location', function ($scope, $resource, $location) {
+            $scope.loaded = false;
+            if(angular.isDefined(localStorage.trainings)){
+                $scope.trainings = angular.fromJson(localStorage.trainings);
+                console.log($scope.trainings)
+                $scope.loaded = true;
+            }else{
+                $scope.loaded = true;
+            }
         }]);
 })();

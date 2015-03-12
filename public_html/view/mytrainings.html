@@ -1,0 +1,28 @@
+<md-tabs>
+    <md-tab ng-repeat="training in trainings" label="{{training.name}}">
+        <md-list >
+            <md-item ng-repeat="unit in training.units">
+                <md-item-content class="md-whiteframe-z1">
+                    <div class="md-tile-left">
+                        <md-icon md-svg-src="img/{{unit.phase}}.svg"></md-icon>
+                    </div>
+                    <div class="md-tile-content" layout="column">
+                        <h3>{{unit.name}}</h3>
+                        <h4>Thema/Ziel der Übung</h4>
+                        <p ng-bind-html="unit.goal | replaceNewLine"></p>
+                        <h4>Ablauf</h4>
+                        <p ng-bind-html="unit.flow | replaceNewLine"></p>
+                        <h4>Variation</h4>
+                        <p ng-bind-html="unit.variation | replaceNewLine"></p>
+                        <h4>Tipps und Korrekturen</h4>
+                        <p ng-bind-html="unit.tipps | replaceNewLine"></p>
+                        <p>
+                            <img src="{{unit.file.data}}" />
+                        </p>
+                    </div>
+                </md-item-content>
+            </md-item>
+        </md-list>
+    </md-tab>
+
+</md-tabs>
