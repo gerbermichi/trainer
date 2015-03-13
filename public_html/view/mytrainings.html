@@ -1,5 +1,11 @@
 <md-tabs>
     <md-tab ng-repeat="training in trainings" label="{{training.name}}">
+        <div>
+            <md-button class="md-fab md-warn" aria-label="remove" ng-click="remove(training)">
+                <md-icon md-svg-src="img/minus.svg"></md-icon>
+            </md-button>
+        </div>
+
         <md-list >
             <md-item ng-repeat="unit in training.units">
                 <md-item-content class="md-whiteframe-z1">

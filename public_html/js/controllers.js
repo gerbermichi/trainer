@@ -114,6 +114,7 @@
                         trainings.splice(i, 1);
                     }
                 }
+
                 Unit.query({q: {_id: {$in: training.unitIds}}}, function (units) {
                     var fileIds = [];
                     angular.forEach(units, function (value) {
@@ -121,8 +122,8 @@
                     });
                     File.query({q: {_id: {$in: fileIds}}}, function (files) {
                         angular.forEach(units, function (unit) {
-                            for(var i = 0; i < files.length; i++){
-                                if(unit.fileId.$oid == files[i]._id.$oid){
+                            for (var i = 0; i < files.length; i++) {
+                                if (unit.fileId.$oid == files[i]._id.$oid) {
                                     unit.file = files[i];
                                     break;
                                 }
@@ -133,6 +134,7 @@
                         localStorage.trainings = angular.toJson(trainings);
                     });
                 });
+
             };
             $scope.add = function () {
                 $location.path("training");
@@ -190,14 +192,24 @@
                 $location.path('/trainings');
             };
         }]);
-     angular.module('trainer').controller("myTrainingsCtrl", ['$scope', '$resource', '$location', function ($scope, $resource, $location) {
+    angular.module('trainer').controller("myTrainingsCtrl", ['$scope', '$resource', '$location', function ($scope, $resource, $location) {
             $scope.loaded = false;
-            if(angular.isDefined(localStorage.trainings)){
+            if (angular.isDefined(localStorage.trainings)) {
                 $scope.trainings = angular.fromJson(localStorage.trainings);
                 console.log($scope.trainings)
                 $scope.loaded = true;
-            }else{
+            } else {
                 $scope.loaded = true;
             }
+            $scope.remove = function(training){
+                var trainings = angular.fromJson(localStorage.trainings);
+                for (var i = trainings.length - 1; i >= 0; i--) {
+                    if (trainings[i]._id.$oid === training._id.$oid) {
+                        trainings.splice(i, 1);
+                    }
+                }
+                $scope.trainings = trainings;
+                localStorage.trainings = angular.toJson(angular.fromJson(trainings));
+            };
         }]);
 })();
